@@ -1,0 +1,147 @@
+.node {
+    width: 20px;
+    height: 20px;
+    margin: 0px 0px -2.5px;
+    outline: .1px solid rgb(68, 67, 239);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.node-finish {
+    background-color: #ffe737;
+}
+
+.node-start {
+  background-image: radial-gradient(circle,rgb(36, 210, 213),rgb(238, 170, 168),rgb(234, 38, 26), rgb(229, 151, 36));
+}
+
+.bomb {
+  background: rgb(234, 38, 26);
+}
+
+
+.node-visited {
+    animation-name: visitedAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function:inherit;
+    animation-delay: 1;
+    animation-direction: inherit;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes visitedAnimation {
+    0% {
+      transform: scale(0.3);
+      background-color: rgb(229, 151, 36);
+      border-radius: 100%;
+    }
+  
+    50% {
+      background-color: rgb(234, 38, 26);
+    }
+  
+    75% {
+      transform: scale(1.2);
+      background-color: rgb(238, 170, 168);
+    }
+  
+    90% {
+      transform: scale(1);
+      background-color: rgb(36, 210, 213);
+    }
+  }
+
+.node-wall {
+    background: rgb(68, 67, 239);
+}
+
+  .node-shortest-path {
+    animation-name: shortestPath;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+  }
+  
+  @keyframes shortestPath {
+    0% {
+      transform: scale(.3);
+      background-color: rgb(229, 151, 36);
+    }
+  
+    50% {
+      transform: scale(.8);
+      background-color: rgb(234, 38, 26);
+    }
+  
+    75% {
+      transform: scale(1);
+      background-color: rgb(238, 170, 168);
+    }
+  
+    90% {
+      transform: scale(1.2);
+      background-color: rgb(36, 210, 213);
+    }
+  }
+
+  .node-maze {
+    animation-name: maze;
+    animation-duration: .1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+  }
+  
+  @keyframes maze {
+    0% {
+      transform: scale(0.6);
+      background-color: rgb(198, 59, 189);
+    }
+  
+    50% {
+      transform: scale(1.2);
+      background-color: rgb(198, 59, 189);
+    }
+  
+    100% {
+      transform: scale(1);
+      background-color: rgb(68, 67, 239);
+    }
+  }
+
+  .node-weighted-maze{
+    animation-name: weighted;
+    animation-duration: .1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+  }
+
+  @keyframes weighted {
+    0% {
+      transform: scale(0.6);
+      background-color: rgb(198, 59, 189);
+    }
+  
+    50% {
+      transform: scale(1.2);
+      background-color: rgb(198, 59, 189);
+    }
+  
+    100% {
+      transform: scale(1);
+      background-image: radial-gradient(circle,rgb(234, 38, 26),rgb(68, 67, 239));
+    }
+  }
