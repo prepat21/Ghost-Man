@@ -1,6 +1,6 @@
 Play Ghost Man !
 
-
+https://ghost-man.netlify.app/
 
 It's a spin on Pac-Man where Pac-Man usually tries to avoid the ghosts but if you saw the movie Pixels, Pac-Man is actually a bad guy.
 
