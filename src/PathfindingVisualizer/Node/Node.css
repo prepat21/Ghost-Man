@@ -12,11 +12,7 @@
 }
 
 .node-start {
-  background-image: radial-gradient(circle,rgb(36, 210, 213),rgb(238, 170, 168),rgb(234, 38, 26), rgb(229, 151, 36));
-}
-
-.bomb {
-  background: rgb(234, 38, 26);
+  background-color: rgb(234, 38, 26);
 }
 
 
@@ -50,6 +46,11 @@
     90% {
       transform: scale(1);
       background-color: rgb(36, 210, 213);
+    }
+
+    100% {
+      transform: scale(1);
+      background-color: rgb(234, 38, 26);
     }
   }
 

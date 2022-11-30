@@ -20,12 +20,9 @@ export default class PathfindingVisualizer extends Component {
     };
   }
 
-  setSpeed() {
-    let currSpeed = this.state.speed;
-    currSpeed *= 5;
-    if (currSpeed > 25) currSpeed = 1;
+  getSpeed(speed) {
     this.setState({
-      speed: currSpeed,
+      speed: speed,
     });
   }
 
@@ -91,19 +88,25 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-    let currSpeed = this.state.speed;
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i * currSpeed);
+        }, 10 * i * this.state.speed);
+        document.getElementById(
+          `node-${START_NODE_ROW}-${START_NODE_COL}`
+        ).className = "node node-start";
+        console.log("i got here");
+        document.getElementById(
+          `node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`
+        ).className = "node node-start";
         return;
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
           "node node-visited";
-      }, 10 * i * currSpeed);
+      }, 10 * i * this.state.speed);
     }
   }
 
@@ -115,6 +118,14 @@ export default class PathfindingVisualizer extends Component {
           "node node-shortest-path";
       }, 65 * i);
     }
+
+    document.getElementById(
+      `node-${START_NODE_ROW}-${START_NODE_COL}`
+    ).className = "node node-start";
+    console.log("i got here");
+    document.getElementById(
+      `node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`
+    ).className = "node node-start";
   }
 
   resetBoard() {
@@ -179,6 +190,21 @@ export default class PathfindingVisualizer extends Component {
     });
   }
 
+  addWeight() {
+    this.resetBoard();
+    let row = Math.floor(Math.random() * 20);
+    let col = Math.floor(Math.random() * 50);
+    if (
+      this.state.grid[row][col].weight === 0 &&
+      (row !== START_NODE_ROW || col !== START_NODE_COL) &&
+      (row !== FINISH_NODE_ROW || col !== FINISH_NODE_COL)
+    ) {
+      getNewGridWithWeightToggled(this.state.grid, row, col);
+      document.getElementById(`node-${row}-${col}`).className =
+        "node node-weighted-maze";
+    }
+  }
+
   render() {
     const { grid, mouseIsPressed } = this.state;
     return (
@@ -194,7 +220,7 @@ export default class PathfindingVisualizer extends Component {
             DFS
           </button>
         </div>
-        <div class="tools">
+        <div style={{ display: "inline-block" }}>
           <button class="tool-bar" onClick={() => this.generateMaze()}>
             Maze
           </button>
@@ -204,11 +230,17 @@ export default class PathfindingVisualizer extends Component {
           <button class="tool-bar" onClick={() => this.resetBoard()}>
             Clear
           </button>
-          <button class="tool-bar" onClick={() => this.setSpeed()}>
-            Speed
-          </button>
           <button class="tool-bar" onClick={() => this.addMine()}>
             Mine
+          </button>
+          <button class="speed-bar" onClick={() => this.getSpeed(1)}>
+            1x
+          </button>
+          <button class="speed-bar" onClick={() => this.getSpeed(5)}>
+            .5x
+          </button>
+          <button class="speed-bar" onClick={() => this.getSpeed(25)}>
+            .25x
           </button>
         </div>
         <div className="grid">
@@ -257,7 +289,7 @@ export default class PathfindingVisualizer extends Component {
             outline: "1px dashed whitesmoke",
           }}
         >
-          <div style={{ background: "#5270F2" }} class="footer"></div>
+          <div style={{ background: "rgb(234, 38, 26)" }} class="footer"></div>
           <p
             style={{
               margin: "0px 0px 40px",
@@ -270,7 +302,7 @@ export default class PathfindingVisualizer extends Component {
           >
             Start Node
           </p>
-          <div style={{ background: "#EB7D5F" }} class="footer"></div>
+          <div style={{ background: "#ffe737" }} class="footer"></div>
           <p
             style={{
               display: "inline-block",
@@ -329,7 +361,7 @@ const getNewGridWithWallToggled = (grid, row, col) => {
 const getNewGridWithWeightToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
-  let newWeight = Math.floor(Math.random() * 5) + 1;
+  let newWeight = 5;
   const newNode = {
     ...node,
     weight: newWeight,
