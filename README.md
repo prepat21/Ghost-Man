@@ -10,7 +10,7 @@ Use 3 different pathfinding algorithms:
 
      - Dijkstra's: A weighted algorithm that is a variation of Breadth First Search
 
-     - A* Search: An extension Dijstra's but utilizes more indepth total cost analysis
+     - A* Search: An extension of Dijkstra's but utilizes more indepth total cost analysis
 
      - DFS: A basic Depth First Search
 
